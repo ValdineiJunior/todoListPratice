@@ -10,9 +10,7 @@ export function Home() {
     ]);
     function add(text: string) {
         if (text.trim().length > 0) {
-            setTodos((todos) => {
-                return [...todos, text];
-            });
+            setTodos((todos) => [...todos, text]);
         }
     }
     function remove(index: number) {
