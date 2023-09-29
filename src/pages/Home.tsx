@@ -5,10 +5,12 @@ import { useState } from "react";
 export function Home() {
     const [todos, setTodos] = useState(["Fazer café", "Estudar", "Passear com a Luna"])
     function add(text: string) {
-        setTodos(todos => {
-
-            return [...todos, text]
-        })
+        if (text.length > 0) {
+            setTodos(todos => {
+    
+                return [...todos, text]
+            })
+        }
     }
     function remove(index: number) {
 
