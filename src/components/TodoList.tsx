@@ -1,13 +1,27 @@
-type TodoListProps = {
-    todos: string[];
-    remove: (index: number) => void
-}
+import { ReactNode, ComponentProps, useEffect } from "react";
+import { CountTodo } from "./CountTodo";
+import { useTodos } from "../contexts/TodoContext";
 
-export function TodoList({ todos, remove }: TodoListProps) {
+type TodoListProps = {
+    children: ReactNode
+} & ComponentProps<"h1">
+
+export function TodoList({ children, ...rest }: TodoListProps) {
+    const {remove, todos} =useTodos()
+    useEffect(() => {
+        // const handleResize = () => {
+        //     console.log("handleResize")
+        // }
+        // window.addEventListener('resize', handleResize)
+
+        return () => {
+            console.log('componente destruido')
+        }
+    }, [])
 
     return (
         <div>
-            <h1>Todo List</h1>
+            <h1 {...rest}>Todo List</h1>
             <ul>
                 {todos.map((todo, index) => {
                     return (
@@ -18,6 +32,8 @@ export function TodoList({ todos, remove }: TodoListProps) {
                     )
                 })}
             </ul>
+            <CountTodo />
+            {children}
         </div>
     )
 }

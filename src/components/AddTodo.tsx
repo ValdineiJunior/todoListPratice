@@ -1,15 +1,12 @@
 import { useState } from "react"
+import { useTodos } from "../contexts/TodoContext"
 
-type AddTodoProps = {
-    add: (text: string) => void
-}
-
-export function AddTodo({ add }: AddTodoProps) {
+export function AddTodo() {
     const [text, setText] = useState("")
-
+    const context = useTodos()
     const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === "Enter") {
-            add(text)
+            context.add(text)
             setText("")
         }
     }
@@ -24,7 +21,7 @@ export function AddTodo({ add }: AddTodoProps) {
             }} onKeyUp={handleKeyPress} value={text} type="text" placeholder="Add your task" />
             <button id="add"
                 onClick={() => {
-                    add(text)
+                    context.add(text)
                     setText("")
                 }
                 }>Add</button>

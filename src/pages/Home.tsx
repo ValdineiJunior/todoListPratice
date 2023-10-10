@@ -3,23 +3,19 @@ import { TodoList } from "../components/TodoList";
 import { useState } from "react";
 
 export function Home() {
-    const [todos, setTodos] = useState([
-        "Fazer café",
-        "Estudar",
-        "Passear com a Luna",
-    ]);
-    function add(text: string) {
-        if (text.trim().length > 0) {
-            setTodos((todos) => [...todos, text]);
-        }
+    const [ isShowingTodoList, setIsShowingTodoList] = useState(true)
+    
+    function handleDestroy() {
+        setIsShowingTodoList(false)
     }
-    function remove(index: number) {
-        setTodos((todos) => todos.filter((_, i) => i !== index));
-    }
+
     return (
         <main>
-            <AddTodo add={add} />
-            <TodoList todos={todos} remove={remove} />
+            <AddTodo/>
+            {isShowingTodoList && <TodoList title="Olá" >
+                <h2>Title2</h2>
+            </TodoList>}
+            <button onClick={handleDestroy}>Destruir TodoList</button>
         </main>
     );
 }
